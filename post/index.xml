@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Patrick DeBiasse</title>
+    <link>https://patrick-debiasse.github.io/post/</link>
+    <description>Recent content in Projects on Patrick DeBiasse</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Mar 2017 12:00:00 -0500</lastBuildDate><atom:link href="https://patrick-debiasse.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project III: Data Engineering</title>
+      <link>https://patrick-debiasse.github.io/post/project-3/</link>
+      <pubDate>Mon, 25 Apr 2022 11:00:59 -0400</pubDate>
+      
+      <guid>https://patrick-debiasse.github.io/post/project-3/</guid>
+      <description>Abstract:
+In this data engineering project, I use X Y Z to A B C. (This project is in the works! Once complete, all code used can be found on my github here.)</description>
+    </item>
+    
+    <item>
+      <title>Project II: Air Quality in Salt Lake City</title>
+      <link>https://patrick-debiasse.github.io/post/project-2/</link>
+      <pubDate>Sat, 29 Feb 2020 11:00:59 -0400</pubDate>
+      
+      <guid>https://patrick-debiasse.github.io/post/project-2/</guid>
+      <description>Abstract:
+In this data analytics project, I investigate how Salt Lake City&amp;rsquo;s air quality has changed over time by using python to read 38 years of csv files from a government website into pandas dataframes, then using matplotlib to identify any trends visually. After identifying the two primary pollutants causing poor air quality in the valley, I discuss how we might be able to reduce them. The Jupyter Notebook used to write this post can be found on my github here.</description>
+    </item>
+    
+    <item>
+      <title>Project I: R is for Art</title>
+      <link>https://patrick-debiasse.github.io/post/project-1/</link>
+      <pubDate>Mon, 17 Feb 2020 10:58:08 -0400</pubDate>
+      
+      <guid>https://patrick-debiasse.github.io/post/project-1/</guid>
+      <description>Abstract:
+In this data analytics project, I use a variety of R packages to download and manipulate XYZ elevation data into a 3D model of one of Salt Lake City&amp;rsquo;s most popular hikes. The R Markdown file used to write this post can be found on my github.
+Background:
+A common source of anxiety when flying is anticipating your immediate neighbors - the sniffler who&amp;rsquo;s &amp;ldquo;pretty sure it&amp;rsquo;s just allergies&amp;rdquo;, freaked out children, the max-screen-brightness-iPad on red-eye wielder.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Project I: R is for Art | Patrick DeBiasse</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Using R to visualize elevation data">
+    <meta name="generator" content="Hugo 0.97.3" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="https://patrick-debiasse.github.io/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Project I: R is for Art" />
+<meta property="og:description" content="Using R to visualize elevation data" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patrick-debiasse.github.io/post/project-1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-02-17T10:58:08-04:00" />
+<meta property="article:modified_time" content="2020-02-17T10:58:08-04:00" /><meta property="og:site_name" content="Patrick DeBiasse" />
+
+<meta itemprop="name" content="Project I: R is for Art">
+<meta itemprop="description" content="Using R to visualize elevation data"><meta itemprop="datePublished" content="2020-02-17T10:58:08-04:00" />
+<meta itemprop="dateModified" content="2020-02-17T10:58:08-04:00" />
+<meta itemprop="wordCount" content="927">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Project I: R is for Art"/>
+<meta name="twitter:description" content="Using R to visualize elevation data"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://patrick-debiasse.github.io/images/R_is_for_Art/3_livingroomtrail_onerotation_reduced.gif');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://patrick-debiasse.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Patrick DeBiasse
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Project I: R is for Art</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              Using R to visualize elevation data
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+       
+      <h1 class="f1 athelas mt3 mb1">Project I: R is for Art</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-02-17T10:58:08-04:00">February 17, 2020</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p><strong>Abstract</strong>:</p>
+<p>In this data analytics project, I use a variety of R packages to download and manipulate XYZ elevation data into a 3D model of one of Salt Lake City&rsquo;s most popular hikes. The R Markdown file used to write this post can be found on my <a href="https://github.com/Patrick-DeBiasse/Topography-Visualizations">github</a>.</p>
+<p><strong>Background</strong>:</p>
+<p>A common source of anxiety when flying is anticipating your immediate neighbors - the sniffler who&rsquo;s &ldquo;pretty sure it&rsquo;s just allergies&rdquo;, freaked out children, the max-screen-brightness-iPad on red-eye wielder. Once seated 3 inches from one of these, no amount of headphone volume can really salvage things.</p>
+<p>That said, now and then this forced proximity is great. This past November, a 4 hour flight from Newark to Denver turned into a 4 hour chat spanning best neighborhoods in Philly, new cancer treatments, food truck entrepreneurship, and (the inspiration for this work) metallic topographical maps. My new friend&rsquo;s name was Jim Abraham, and among other things, he hand-sculpts metallic topographical maps. Here is Nantucket Island:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/R_is_for_Art/1_Nantucket_Island_metalic.PNG"
+         alt="Nantucket Island, by Jim Abraham. View his work here"/><figcaption>
+            <p>Nantucket Island, by Jim Abraham. View his work <a href="https://www.abrahamartistry.com/">here</a></p>
+        </figcaption>
+</figure>
+
+<p>About a month after meeting Jim, I stumbled upon Rayshader - an R package that allows you to create detailed 3D renderings of topography using publicly available elevation data.</p>
+<p>I immediately thought of his work, and emailed him to learn more about how he was currently getting topography for his regions of interest. Turns out he had grown accustomed to manually crawling through the terrain on Google Maps - a slow and painful process.</p>
+<p>I gladly offered to generate topography using Rayshader to relieve some of this arduous map-crawling. Below is Nantucket Island again, rendered with elevation data and a satellite image overlay:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/R_is_for_Art/2_Nantucket%20Island_rendered.png"
+         alt="Nantucket Island, rendered with R."/><figcaption>
+            <p>Nantucket Island, rendered with R.</p>
+        </figcaption>
+</figure>
+
+<p>Admittedly, flat regions like Nantucket Island don&rsquo;t lend themselves to exciting 3D renderings. You can see some texture, but there&rsquo;s just not a lot of the third dimension going on. For more mountainous regions, things can look more interesting (while also being more  helpful for Jim).</p>
+<p>To demonstrate this, I generated 3D topography for one of Salt Lake City&rsquo;s more popular hikes - the Living Room Trail. It has approximately 1,000 feet of elevation gain, as opposed to Nantucket Island&rsquo;s meager 30 feet.</p>
+<p>See below for the code used to generate the rendering. In general, the process is as follows:</p>
+<ol>
+<li>Install the necessary packages</li>
+<li>Set up the region (coordinates and area of location to be visualized)</li>
+<li>Set the plot resolution</li>
+<li>Download the region&rsquo;s elevation data and transform it to Rayshader&rsquo;s liking</li>
+<li>Add a satellite image overlay of the region (optional, but cool)</li>
+<li>Render the final scene (in this case, a rotating &ldquo;flyover&rdquo; video of the region)</li>
+</ol>
+<p><strong>Load packages</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(rayshader) <span style="color:#75715e">#3D plotting.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(geoviz) <span style="color:#75715e">#Elevation data downloader.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">library</span>(av) <span style="color:#75715e">#For making videos (only needed if you want to make things like rotating GIFs).</span>
+</span></span></code></pre></div><p><strong>Set up the region</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#Lat and long for Living Room Trail, SLC.</span>
+</span></span><span style="display:flex;"><span>lat <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">40.766632</span>
+</span></span><span style="display:flex;"><span>long <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">-111.811704</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Size of surrounding area you want to visualize.</span>
+</span></span><span style="display:flex;"><span>square_km <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0.8</span>
+</span></span></code></pre></div><p><strong>Choose the plotting resolution</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>max_tiles <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">20</span>
+</span></span></code></pre></div><p>Tiles are little  pieces of the overall map that get stitched together. Requesting more tiles results in a higher resolution (but slower to generate) image.</p>
+<p><strong>Get elevation data</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#Get Digital Elevation Model from &#39;mapzen&#39; via &#39;Amazon Public Datasets&#39;.</span>
+</span></span><span style="display:flex;"><span>dem <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mapzen_dem</span>(lat, long, square_km, max_tiles <span style="color:#f92672">=</span> max_tiles)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#elmat stands for elevation matrix.</span>
+</span></span><span style="display:flex;"><span>elmat <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(
+</span></span><span style="display:flex;"><span>  raster<span style="color:#f92672">::</span><span style="color:#a6e22e">extract</span>(dem, raster<span style="color:#f92672">::</span><span style="color:#a6e22e">extent</span>(dem), method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bilinear&#39;</span>),
+</span></span><span style="display:flex;"><span>  nrow <span style="color:#f92672">=</span> <span style="color:#a6e22e">ncol</span>(dem),
+</span></span><span style="display:flex;"><span>  ncol <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(dem)
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>Thanks to NASA’s Space Shuttle Radar Topography Mission, elevation data for most of the earth’s surface is
+publicly available with spatial (x-y) resolution of 30 meters and height
+(z) resolution of about 15 meters. You can explore and manually download
+this data <a href="https://www.usgs.gov/earthexplorer-0/">here</a>.</p>
+<p><strong>Add a satellite image overlay</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#75715e">#To get a mapbox key, go here https://docs.mapbox.com/help/glossary/access-token/.</span>
+</span></span><span style="display:flex;"><span>mapbox_key <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;pk.eyJ1IjoicGF0cmlja2RlYiIsImEiOiJjazVtcmltcWIxMnJmM21wbDZkcHlzMzEwIn0.sAIvHarJXAc6VHgomtK2yQ&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#Rayshader has built-in terrain aesthetics you can choose from, but satellite images are more realistic:</span>
+</span></span><span style="display:flex;"><span>overlay_image <span style="color:#f92672">&lt;-</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">slippy_overlay</span>(
+</span></span><span style="display:flex;"><span>    dem,
+</span></span><span style="display:flex;"><span>    image_source <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mapbox&#34;</span>,
+</span></span><span style="display:flex;"><span>    image_type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;satellite&#34;</span>,
+</span></span><span style="display:flex;"><span>    png_opacity <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.6</span>,
+</span></span><span style="display:flex;"><span>    api_key <span style="color:#f92672">=</span> mapbox_key
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><p><strong>Render the Rayshader scene</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span>elmat <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sphere_shade</span>(texture <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;desert&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_water</span>(<span style="color:#a6e22e">detect_water</span>(elmat), color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;imhof4&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_shadow</span>(<span style="color:#a6e22e">ray_shade</span>(elmat, zscale <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_shadow</span>(<span style="color:#a6e22e">ambient_shade</span>(elmat), <span style="color:#ae81ff">0</span>) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">add_overlay</span>(overlay_image) <span style="color:#f92672">%&gt;%</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">plot_3d</span>(elmat, zscale <span style="color:#f92672">=</span> <span style="color:#a6e22e">raster_zscale</span>(dem), fov <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, theta <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, zoom <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.75</span>, phi <span style="color:#f92672">=</span> <span style="color:#ae81ff">55</span>, windowsize <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">800</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Sys.sleep</span>(<span style="color:#ae81ff">0.2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">render_movie</span>(<span style="color:#e6db74">&#39;SLC_Living_Room_Trail&#39;</span>)
+</span></span></code></pre></div><p><strong>Final output:</strong></p>
+<figure><img src="https://patrick-debiasse.github.io/images/R_is_for_Art/3_livingroomtrail_onerotation_reduced.gif"
+         alt="Living Room Trail, rendered with R."/><figcaption>
+            <p>Living Room Trail, rendered with R.</p>
+        </figcaption>
+</figure>
+
+<p><strong>Closing thoughts</strong>:</p>
+<p>3D topography visualizations have quite a few promising applications. Helping Jim spend more time with his pieces and less time scrolling through 2D terrain is one fairly niche case (nonetheless one I&rsquo;m excited about supporting).</p>
+<p>For something that might appeal to a broader audience, replacing standard 2D topographical maps with 3D renderings would be a boon for hikers. I for one have botched more than a few hikes not interpreting standard topographical maps correctly. This is the nature of making 2D abstractions of what is inherently 3D information. See below for what the Living Room Trail looks like, represented with standard topography:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/R_is_for_Art/4_living_room_trail_topography.PNG"
+         alt="Standard Living Room Trail topography (from AllTrails.com)"/><figcaption>
+            <p>Standard Living Room Trail topography (from AllTrails.com)</p>
+        </figcaption>
+</figure>
+
+<p>If AllTrails (a popular hiking app) replaced their standard topographical maps with 3D renderings that users could turn over and explore like any other 3D model, users would benefit from a clearer idea of where they are currently and what lies down the trail. This would encourage more confident exploration and likely cut down on wrong turns. Once things warm up, I think I&rsquo;ll see about adding an XYZ trace to the Living Room Trail rendering with latitude/longitude/elevation data from my phone&rsquo;s GPS (assuming I don&rsquo;t get lost).</p>
+<p><strong>Acknowledgements</strong>:</p>
+<ul>
+<li>
+<p>Jim Abraham for the collaboration, view his work
+<a href="https://www.abrahamartistry.com/">here</a></p>
+</li>
+<li>
+<p>Tyler Morgan-Wall for creating
+<a href="https://www.rayshader.com/">Rayshader</a></p>
+</li>
+<li>
+<p>Neil Charles for creating
+<a href="https://cran.r-project.org/web/packages/geoviz/index.html">Geoviz</a></p>
+</li>
+</ul>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://patrick-debiasse.github.io/" >
+    &copy;  Patrick DeBiasse 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

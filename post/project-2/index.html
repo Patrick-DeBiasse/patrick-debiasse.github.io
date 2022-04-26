@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Project II: Air Quality in Salt Lake City | Patrick DeBiasse</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Using Python to collect and explore EPA air quality data.">
+    <meta name="generator" content="Hugo 0.97.3" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="https://patrick-debiasse.github.io/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="Project II: Air Quality in Salt Lake City" />
+<meta property="og:description" content="Using Python to collect and explore EPA air quality data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://patrick-debiasse.github.io/post/project-2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-02-29T11:00:59-04:00" />
+<meta property="article:modified_time" content="2020-02-29T11:00:59-04:00" /><meta property="og:site_name" content="Patrick DeBiasse" />
+
+<meta itemprop="name" content="Project II: Air Quality in Salt Lake City">
+<meta itemprop="description" content="Using Python to collect and explore EPA air quality data."><meta itemprop="datePublished" content="2020-02-29T11:00:59-04:00" />
+<meta itemprop="dateModified" content="2020-02-29T11:00:59-04:00" />
+<meta itemprop="wordCount" content="2380">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Project II: Air Quality in Salt Lake City"/>
+<meta name="twitter:description" content="Using Python to collect and explore EPA air quality data."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://patrick-debiasse.github.io/images/SLC_Air_Quality/median_AQI.png');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://patrick-debiasse.github.io/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Patrick DeBiasse
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://patrick-debiasse.github.io/post/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Project II: Air Quality in Salt Lake City</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              Using Python to collect and explore EPA air quality data.
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        PROJECTS
+      </aside>
+       
+      <h1 class="f1 athelas mt3 mb1">Project II: Air Quality in Salt Lake City</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-02-29T11:00:59-04:00">February 29, 2020</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p><strong>Abstract</strong>:</p>
+<p>In this data analytics project, I investigate how Salt Lake City&rsquo;s air quality has changed over time by using python to read 38 years of csv files from a government website into pandas dataframes, then using matplotlib to identify any trends visually. After identifying the two primary pollutants causing poor air quality in the valley, I discuss how we might be able to reduce them. The Jupyter Notebook used to write this post can be found on my github <a href="https://github.com/Patrick-DeBiasse/SLC-Air-Quality/">here</a>.</p>
+<p><strong>Background</strong>:</p>
+<p>As a child, I remember watching my dad clean the fish tank. This was a monthly ritual, as over that length of time it would go from clear to cloudy to “we should not be pet owners” dirty. I always felt bad for the fish in the days preceding this cleaning – when they were clearly bopping around in some nasty stuff:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/dirty_tank_compressed_3.jpg"
+         alt="Not the fish tank of my childhood, but similar."/><figcaption>
+            <p>Not the fish tank of my childhood, but similar.</p>
+        </figcaption>
+</figure>
+
+<p>Household fish aren’t the only ones subjected to such conditions. Many of us share their situation by living in areas with dirty air. Here’s a map of PM2.5 pollution (tiny particles that cause a host of health problems) across the U.S.:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/US_air_3.jpg"
+         alt="PM2.5 pollution across the U.S."/><figcaption>
+            <p>PM2.5 pollution across the U.S.</p>
+        </figcaption>
+</figure>
+
+<p>The blotch of red towards the middle-left of the country is Salt Lake City, where due to the perimeter of mountains surrounding the inhabited valley floor (forming a bowl-like geometry), pollutants get trapped and accumulate. This is especially bad in the winter, when a blanket of warm air forms a “lid” on top of the bowl – this effect is known as the <em>winter inversion</em>.</p>
+<p>I had heard about this spooky effect prior to moving to SLC, but so far this winter, air quality hasn&rsquo;t seemed to be an issue. Is this inversion business just media hype? Is polluted air in Salt Lake a thing of the past? I was curious to see what the air quality in SLC is today and how it has changed over time.</p>
+<p>Poking around, I came across an article in the Deseret News titled “Visualizing SLC air pollution in 35 years and what it tells us.” The <a href="https://www.deseret.com/2015/5/7/20564270/visualizing-slc-air-pollution-in-35-years-and-what-it-tells-us">article</a> links to a visualization, but sadly, the page it links to does not load. I sent the author a note to let her know, and in the meantime decided to see if I could pull air quality data and visualize it myself.</p>
+<p>Fortunately, the EPA makes air quality data available to the public via their AirData Quality Monitors <a href="https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=5f239fd3e72f424f98ef3d5def547eb5&amp;extent=-146.2334,13.1913,-46.3896,56.5319">web app</a>. Below are all the monitors across the U.S. for the five primary pollutants used in evaluating air quality (carbon monoxide, nitrogen dioxide, ozone, PM2.5, and sulfur dioxide):</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/US_monitors_reduced.png"
+         alt="Air quality monitors across the U.S."/><figcaption>
+            <p>Air quality monitors across the U.S.</p>
+        </figcaption>
+</figure>
+
+<p>Zooming in on SLC, we can see the valley has five active monitors:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/valley_monitors_reduced.png"
+         alt="Air quality monitors in Salt Lake City."/><figcaption>
+            <p>Air quality monitors in Salt Lake City.</p>
+        </figcaption>
+</figure>
+
+<p>The EPA takes the pollutant concentration data from these monitors (some measured in parts per million, some in parts per billion, others microgram per cubic meter), and translates them into a more intuitive measurement called the Air Quality Index, or AQI. The AQI is calculated for each of the primary pollutants individually, with the  highest AQI of the group being the number that gets reported to describe air quality on a given day. The table below gives an idea of how each pollutant&rsquo;s concentration is converted into the AQI:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/AQI_calculation_table_reduced.png"
+         alt="Detail on how AQI is calculated per pollutant."/><figcaption>
+            <p>Detail on how AQI is calculated per pollutant.</p>
+        </figcaption>
+</figure>
+
+<p>Looking at the right side of the table, you can see the AQI ranges from 0 to 500, with higher numbers signifying worse air quality. 0 to 50 is &ldquo;Good&rdquo; air quality (green), 51 to 100 is &ldquo;Moderate&rdquo; air quality (yellow), and so on.</p>
+<p>Equipped with that background, we can start analyzing air quality data.</p>
+<p><strong>Analysis</strong>:</p>
+<p>The EPA has made daily AQI data across the U.S. available from 1980 to today. 2019&rsquo;s data isn&rsquo;t complete just yet, so I pulled data from 1980 to 2018.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#loading packages</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> zipfile
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> glob
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> io
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pulling annual AQI data by county for 1980 to 2018, unzipping and placing the csv files in a desktop folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1980</span>, <span style="color:#ae81ff">2019</span>):
+</span></span><span style="display:flex;"><span>    zip_file_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://aqs.epa.gov/aqsweb/airdata/annual_aqi_by_county_&#39;</span> <span style="color:#f92672">+</span> str(i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.zip&#39;</span>
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(zip_file_url, stream<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> zipfile<span style="color:#f92672">.</span>ZipFile(io<span style="color:#f92672">.</span>BytesIO(r<span style="color:#f92672">.</span>content))
+</span></span><span style="display:flex;"><span>    z<span style="color:#f92672">.</span>extractall(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\Pat\Desktop\zip_files&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#combining all csv files into one dataframe, ignoring column headers after the first file</span>
+</span></span><span style="display:flex;"><span>path <span style="color:#f92672">=</span> <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;C:\Users\Pat\Desktop\zip_files&#39;</span>
+</span></span><span style="display:flex;"><span>all_files <span style="color:#f92672">=</span> glob<span style="color:#f92672">.</span>glob(path <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/*.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>li <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> filename <span style="color:#f92672">in</span> all_files:
+</span></span><span style="display:flex;"><span>    df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(filename, index_col<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, header<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    li<span style="color:#f92672">.</span>append(df)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>all_counties_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>concat(li, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, ignore_index<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#filtering the datafrarme for Salt Lake county only</span>
+</span></span><span style="display:flex;"><span>df_SLC <span style="color:#f92672">=</span> all_counties_df[all_counties_df<span style="color:#f92672">.</span>County <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Salt Lake&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#checking the first five rows (years 1980 to 1984)</span>
+</span></span><span style="display:flex;"><span>df_SLC<span style="color:#f92672">.</span>head()
+</span></span></code></pre></div><p>We now have a dataframe with annual AQI data for Salt Lake County from 1980 to 2018. It includes:</p>
+<ul>
+<li>the AQI categorical rating (&ldquo;Good&rdquo;, &ldquo;Moderate&rdquo;, &ldquo;Unhealthy for Sensitive Groups&rdquo;, and so on) for each day of each year</li>
+<li>the primary pollutant (pollutant with the highest AQI) for each day of each year</li>
+<li>the median AQI for each year</li>
+</ul>
+<p>To investigate these different aspects of the data, I split the original dataframe up into three separate ones:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_AQI <span style="color:#f92672">=</span> df_SLC[[<span style="color:#e6db74">&#39;Year&#39;</span>, <span style="color:#e6db74">&#39;Good Days&#39;</span>, <span style="color:#e6db74">&#39;Moderate Days&#39;</span>, <span style="color:#e6db74">&#39;Unhealthy for Sensitive Groups Days&#39;</span>, <span style="color:#e6db74">&#39;Unhealthy Days&#39;</span>, <span style="color:#e6db74">&#39;Very Unhealthy Days&#39;</span>, <span style="color:#e6db74">&#39;Hazardous Days&#39;</span>]]
+</span></span><span style="display:flex;"><span>df_pollutant <span style="color:#f92672">=</span> df_SLC[[<span style="color:#e6db74">&#39;Year&#39;</span>, <span style="color:#e6db74">&#39;Days CO&#39;</span>, <span style="color:#e6db74">&#39;Days NO2&#39;</span>, <span style="color:#e6db74">&#39;Days SO2&#39;</span>, <span style="color:#e6db74">&#39;Days Ozone&#39;</span>, <span style="color:#e6db74">&#39;Days PM2.5&#39;</span>]]
+</span></span><span style="display:flex;"><span>df_median_AQI <span style="color:#f92672">=</span> df_SLC[[<span style="color:#e6db74">&#39;Year&#39;</span>, <span style="color:#e6db74">&#39;Median AQI&#39;</span>]]
+</span></span></code></pre></div><p>With the dataframes properly split up, we can begin visualizing things:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> df_AQI<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>area(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, color <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;yellow&#39;</span>,<span style="color:#e6db74">&#39;orange&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;purple&#39;</span>, <span style="color:#e6db74">&#39;black&#39;</span>]) <span style="color:#75715e">#defining colors to match AQI categories</span>
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>legend(loc <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper right&#39;</span>,frameon<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.75</span>, <span style="color:#ae81ff">0.7</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Days&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#plt.savefig(r&#39;C:\Users\Pat\Desktop\Patrick-DeBiasse.github.io\assets\images\SLC_Air_Quality\rating_by_year.png&#39;, bbox_inches=&#39;tight&#39;, dpi=300)</span>
+</span></span></code></pre></div><figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/rating_by_year.png"
+         alt="Plot of SLC&amp;rsquo;s Daily AQI from 1980 to 2018."/><figcaption>
+            <p>Plot of SLC&rsquo;s Daily AQI from 1980 to 2018.</p>
+        </figcaption>
+</figure>
+
+<p>From 1980 to 2018, there has been a fairly dramatic shift towards improved air quality, as signified by an increase in &ldquo;Good&rdquo; and &ldquo;Moderate&rdquo; days and a decrease in &ldquo;Unhealthy&rdquo; ones. 1982 would have been an especially good year to hold your breath, while 2014 looks quite green.</p>
+<p>That said, there does seem to be a decrease in the number of &ldquo;Good&rdquo; air quality days in recent years. Looking specifically at that portion of the graph, things become more clear:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>df_AQI_recent <span style="color:#f92672">=</span> df_AQI[df_AQI<span style="color:#f92672">.</span>Year <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2013</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> df_AQI_recent<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>area(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, color <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;green&#39;</span>, <span style="color:#e6db74">&#39;yellow&#39;</span>,<span style="color:#e6db74">&#39;orange&#39;</span>, <span style="color:#e6db74">&#39;red&#39;</span>, <span style="color:#e6db74">&#39;purple&#39;</span>, <span style="color:#e6db74">&#39;black&#39;</span>])
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>legend(loc <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper right&#39;</span>,frameon<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.75</span>, <span style="color:#ae81ff">0.7</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>xticks([<span style="color:#ae81ff">2014</span>, <span style="color:#ae81ff">2015</span>, <span style="color:#ae81ff">2016</span>, <span style="color:#ae81ff">2017</span>, <span style="color:#ae81ff">2018</span>])
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Days&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#plt.savefig(r&#39;C:\Users\Pat\Desktop\Patrick-DeBiasse.github.io\assets\images\SLC_Air_Quality\recent_AQI_2.png&#39;, bbox_inches=&#39;tight&#39;, dpi = 300)</span>
+</span></span></code></pre></div><figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/recent_AQI_2.png"
+         alt="Plot of SLC&amp;rsquo;s Daily AQI from 2014 to 2018."/><figcaption>
+            <p>Plot of SLC&rsquo;s Daily AQI from 2014 to 2018.</p>
+        </figcaption>
+</figure>
+
+<p>Since 2014, Salt Lake City has seen a decrease in &ldquo;Good&rdquo; air quality days. In their place are more &ldquo;Moderate&rdquo;
+and &ldquo;Unhealthy for Sensitive Groups&rdquo; days. This negative trend is further evidenced by plotting median AQI per year:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> df_median_AQI<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>area(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, stacked<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, legend <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>axhline(y<span style="color:#f92672">=</span><span style="color:#ae81ff">50</span>, linewidth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, linestyle<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-.&#39;</span>, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;r&#39;</span>)
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Median AQI&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#plt.savefig(r&#39;C:\Users\Pat\Desktop\Patrick-DeBiasse.github.io\assets\images\SLC_Air_Quality\median_AQI.png&#39;, bbox_inches=&#39;tight&#39;, dpi=300)</span>
+</span></span></code></pre></div><figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/median_AQI.png"
+         alt="Plot of SLC&amp;rsquo;s Median AQI per year from 1980 to 2018."/><figcaption>
+            <p>Plot of SLC&rsquo;s Median AQI per year from 1980 to 2018.</p>
+        </figcaption>
+</figure>
+
+<p>The reference line is drawn at AQI=50. You might recall, an AQI below 50 signifies &ldquo;Good&rdquo; air quality, while an AQI between 50 and 100 signifies &ldquo;Moderate&rdquo; air quality. Great progress was made from 1980 to 2000 in reducing median AQI, at which point progress stalled, then sadly reversed in recent years.</p>
+<p>Which pollutants are contributing to the recent increase in median AQI?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>fig <span style="color:#f92672">=</span> df_pollutant<span style="color:#f92672">.</span>plot<span style="color:#f92672">.</span>area(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Year&#39;</span>, stacked<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>fig<span style="color:#f92672">.</span>legend(loc <span style="color:#f92672">=</span><span style="color:#e6db74">&#39;upper right&#39;</span>,frameon<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, bbox_to_anchor<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.4</span>, <span style="color:#ae81ff">0.7</span>))
+</span></span><span style="display:flex;"><span>plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;Days&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#plt.savefig(r&#39;C:\Users\Pat\Desktop\Patrick-DeBiasse.github.io\assets\images\SLC_Air_Quality\pollutant_mix.png&#39;, bbox_inches=&#39;tight&#39;, dpi=300)</span>
+</span></span></code></pre></div><figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/pollutant_mix.png"
+         alt="Plot of highest AQI pollutant per day from 1980 to 2018."/><figcaption>
+            <p>Plot of highest AQI pollutant per day from 1980 to 2018.</p>
+        </figcaption>
+</figure>
+
+<p>The plot above shows which pollutant is the primary contributor to poor air quality per day (which of the five has the highest AQI), from 1980 to 2018.</p>
+<p>Sulfur dioxide was the dominant pollutant from 1980 to 1995, at which point its presence dramatically reduced. In its place, ozone (more commonly known as smog) has surged. Today ozone is the largest contributor to poor air quality in the valley. PM2.5 has also had a concerning rise since 2000.</p>
+<p>Having identified these two pollutants, I had some questions:</p>
+<ul>
+<li>What causes ozone and PM2.5 pollution?</li>
+<li>How harmful are they?</li>
+<li>Why are they increasing?</li>
+<li>How can we reduce air pollution in the valley?</li>
+</ul>
+<p><strong>Discussion</strong>:</p>
+<p>Ozone is caused by a reaction of chemical precursors NOx and VOC (predominantly caused by the combustion of fossil fuels) and UV rays from sunlight:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/ozone_formation.jpg"
+         alt="Graphic detailing how ozone forms (source: EPA)"/><figcaption>
+            <p>Graphic detailing how ozone forms (source: EPA)</p>
+        </figcaption>
+</figure>
+
+<p>PM2.5 (particulate pollution measuring less than 2.5 micrometers in diameter) comes from a variety of sources, including: the aforementioned precursors VOC and NOX (from fossil fuel combustion), burning wood, dust, pollen, and soot. Estimates from a 2014 study performed by the Utah Division of Air Quality clear things up a bit, identifying three main sources of PM2.5:</p>
+<figure><img src="https://patrick-debiasse.github.io/images/SLC_Air_Quality/pm2.5.png"
+         alt="Sources of PM2.5 in Salt Lake, Davis, and Weber Counties (source: UDAQ, 2014 study)"/><figcaption>
+            <p>Sources of PM2.5 in Salt Lake, Davis, and Weber Counties (source: UDAQ, 2014 study)</p>
+        </figcaption>
+</figure>
+
+<ul>
+<li>Point sources are large industrial or commercial facilities that emit more than 100 tons per year of a regulated pollutant.</li>
+<li>Mobile sources are vehicles, trains, aircraft, boats, and so on.</li>
+<li>Area sources are space heating of structures, smoke from wood burning, dust from roadways, and emissions from restaurants, dry cleaners, printing/graphics, and auto body shops.</li>
+</ul>
+<p>As you can see, ozone and PM2.5 share the same largest cause - the combustion of fossil fuels. This is convenient in that we could reduce both pollutants through the same actions.</p>
+<p>That said, is our air quality currently &ldquo;good enough&rdquo;? What kind of health issues do these pollutants actually cause to those living in Salt Lake?</p>
+<p>An &ldquo;expert assessment&rdquo; performed by a group of researchers at BYU compiled research from 21 experts across medicine, public health, atmospheric science, and economics to understand the costs of air pollution in Utah. Their #1 key finding was:</p>
+<p><em>&ldquo;Air pollution shortens the life of the average Utahn by 2 (1.1 to 3.5) years. This loss of life is distributed across most of the population rather than only affecting &ldquo;sensitive groups.&rdquo; For example, 75% of Utahns lose 1 year of life or more because of air pollution and 23% lose 5 years or more. These estimates are directly in line with medical studies of the health effects of exposure to air pollution.&rdquo;</em></p>
+<p>The study goes on to identify the primary cause of air pollution in Salt Lake City:</p>
+<p><em>&ldquo;85% of the pollutants causing health and economic harm are fossil fuel combustion products (fine particulate matter, ozone, and various oxides).&rdquo;</em></p>
+<p>If you&rsquo;re curious, read more of the study&rsquo;s findings <a href="https://pws.byu.edu/ben-abbott-lab/human-health-and-economic-costs-of-air-pollution-in-utah">here</a>.</p>
+<p>Knowing that air pollution is genuinely harmful to our health, and that 85% of it is caused by fossil fuel combustion, how can we go about reducing fossil fuel combustion in the valley? While carpooling and improving the efficiency of our homes would help, transitioning to electric vehicles for our transportation needs and renewable energy sources to power our homes and industries would be a much more direct route to meaningfully improving Salt Lake City&rsquo;s air quality. With air quality on a negative trend for the past few years, and an appreciation of the associated health effects, I think more aggressive action isn&rsquo;t unwarranted.</p>
+<p>I&rsquo;m not alone - here&rsquo;s another finding from the BYU study:</p>
+<p><em>&ldquo;Utahns ranked air quality as the 3rd most important issue in the state, after only water and education, and 80% of Utahns said they would accept additional taxes and legislation to improve air quality.&rdquo;</em></p>
+<p>With such support from the public, I hope Utah will accelerate the adoption of electric vehicles and implementation of renewable energy sources. The government could take the lead on this by electrifying their fleet vehicles where applicable. This happens to be the #2 recommendation made by a 37-person Technical Advisory Committee tasked with informing Utah&rsquo;s legislature on how best to improve our air quality. Check out all 7 recommendations made by the committee <a href="https://gardner.utah.edu/wp-content/uploads/Utah-Roadmap-Public-Draft.pdf">here</a>.</p>
+<p>Worth noting here is that as long as fossil fuels are the dominant source of energy in the valley, Salt Lake City&rsquo;s quickly growing population (resulting in more traffic, more buildings, more economic activity) will lead directly to greater fossil fuel combustion, more pollution, and worse air quality.</p>
+<p><strong>Conclusion</strong>:</p>
+<p>Despite great progress from 1980 to 1995, air quality in Salt lake City has become worse in recent years. The pollutants most responsible for this alarming trend are ozone (smog) and PM2.5 (particulate pollution). Both of these pollutants are caused in large part by the combustion of fossil fuels for the valley&rsquo;s transportation and residential/commercial energy needs. Accelerating the adoption of electric vehicles and renewable energy sources is the most direct route to improving air quality in Salt Lake City.</p>
+<p><strong>Future work</strong>:</p>
+<p>The original dataframe made for this post contains AQI data for all counties across the U.S. from 1980 to 2018. In order to make air quality data accessible for more people, I would like to make an interactive dashboard that would allow users to select their own state and county in order to get direct access to the plots I found useful in assessing Salt Lake City&rsquo;s air quality. This could help communities diagnose the quality of their air at an AQI level, then look specifically at which primary sources of pollution are at fault, thus better informing their efforts at improving their air.</p>
+<p>In addition, through this work I found I really knew very little about how air quality is measured, communicated, and how harmful polluted air can be. Placing more visible air quality monitors downtown in high foot traffic areas that display live readouts of air quality and pollutant mix could help educate others and further increase public awareness of the issue, potentially accelerating political action.</p>
+<p><strong>References</strong>:</p>
+<p>Brigham Young University - College Undergraduate Research Awards Program (2020) &ldquo;Human health and economic costs of air pollution in Utah&rdquo;. Online <a href="https://brightspotcdn.byu.edu/96/f4/8817094748fd8ac1edc5288bf804/costs-of-air-pollution-byu-1-1.pdf">here</a>.</p>
+<p>University of Utah Center for High Performing Computing (2017) - &ldquo;Frequently asked Questions about Wintertime PM2.5 Pollution in Utah&rsquo;s Salt Lake Valley&rdquo;. Online <a href="http://home.chpc.utah.edu/~whiteman/PM2.5/PM2.5.html">here</a>.</p>
+<p>Hannah Ritchie and Max Roser (2020) - &ldquo;Outdoor Air Pollution&rdquo;. Online at OurWorldInData.org <a href="https://ourworldindata.org/outdoor-air-pollution">here</a>.</p>
+<p>WHO (2018) – Fact sheet – Ambient air quality and health. Updated May 2018. Online <a href="https://ourworldindata.org/outdoor-air-pollution">here</a>.</p>
+<p>NASA (2010) - &ldquo;New Map Offers a Global View of Health-Sapping Air Pollution&rdquo;. Published Sep 2010. Online <a href="https://www.nasa.gov/topics/earth/features/health-sapping.html">here</a>.</p>
+<p>EPA (2018) - &ldquo;Technical Assistance Document for the
+Reporting of Daily Air Quality – the Air Quality
+Index (AQI)&rdquo;. Updated Sep 2018. Online <a href="https://www3.epa.gov/airnow/aqi-technical-assistance-document-sept2018.pdf">here</a>.</p>
+<p>EPA (2017) - &ldquo;Air Quality Index - A Guide to Air Quality and Your Health&rdquo;. Updated Jul 2017. Online <a href="https://airnow.gov/index.cfm?action=aqi_brochure.index">here</a>.</p>
+<p>Wikipedia (2020) - &ldquo;Air quality index&rdquo;. Updated Feb 2020. Online <a href="https://en.wikipedia.org/wiki/Air_quality_index#Computation">here</a>.</p>
+<p>Utah DEQ (2020) - &ldquo;What is Ozone?&rdquo;. Updated Feb 2020. Online <a href="https://deq.utah.gov/air-quality/what-is-ozone">here</a>.</p>
+<p>Utah DEQ (2019) - &ldquo;Particulate Matter Overview&rdquo;. Updated Jun 2019. Online <a href="https://deq.utah.gov/air-quality/particulate-matter-overview">here</a>.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://patrick-debiasse.github.io/" >
+    &copy;  Patrick DeBiasse 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
